@@ -1,0 +1,10 @@
+Flask==2.2
+Flask-SQLAlchemy==3.0.2
+Flask-Migrate
+Flask-Login
+PyJWT
+psycopg2-binary
+psycopg2
+python-dotenv
+Flask-JWT-Extended
+Werkzeug==2.2.2
