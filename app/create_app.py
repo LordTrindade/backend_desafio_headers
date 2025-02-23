@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 #from service import UserService, PostService
 from service.user_service import UserService; from service.post_service import PostService
 #from controller import post_bp,user_bp
-from controller.post_controller import post_bp; from controller.user_controller import user_bp
+from controller.post_controller import post_bp; from controller.user_controller import user_bp; from controller.authentication_controller import auth_bp
 
 from create_db import db
 from config import Config
@@ -24,6 +24,7 @@ def create_app():
 
     app.register_blueprint(user_bp)
     app.register_blueprint(post_bp)
+    app.register_blueprint(auth_bp)
 
     @app.route('/')
     def home():

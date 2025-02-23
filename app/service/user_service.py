@@ -22,7 +22,7 @@ class UserService:
         #nota: coloquei aqui o email de forma arbitraria...
 
         if name is None or email is None or user_type_id is None:
-            raise MissingData(f"É necessário todos os dados para criar o usuário.")
+            raise MissingData(f"All fields required to create an user.")
 
 
         new_user = User(
