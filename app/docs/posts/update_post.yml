@@ -1,0 +1,30 @@
+summary: 'Update a post'
+description: 'Update an existing post by its ID. Requires JWT authentication and user/admin rights.'
+tags:
+  - Post
+parameters:
+  - in: 'path'
+    name: 'post_id'
+    type: 'integer'
+    required: true
+    description: 'ID of the post to update'
+  - in: 'body'
+    name: 'data'
+    description: 'New data for the post'
+    required: true
+    schema:
+      type: 'object'
+      properties:
+        title:
+          type: 'string'
+        content:
+          type: 'string'
+responses:
+  200:
+    description: 'Post updated successfully'
+  403:
+    description: 'Unauthorized to update the post'
+  404:
+    description: 'Post not found'
+  500:
+    description: 'Internal server error'

@@ -1,0 +1,37 @@
+summary: 'Update user'
+description: 'Update an existing user identified by user ID. Requires JWT authentication and own user/admin rights.'
+parameters:
+  - in: 'path'
+    name: 'user_id'
+    required: true
+    type: 'integer'
+    description: 'The user ID'
+  - in: 'body'
+    name: 'user'
+    description: 'User data to update'
+    required: true
+    schema:
+      $ref: '#/definitions/UserUpdate'
+tags:
+  - User
+responses:
+  200:
+    description: 'User updated successfully'
+  400:
+    description: 'Data required'
+  403:
+    description: 'Authorization error'
+  404:
+    description: 'User not found'
+  500:
+    description: 'Internal server error'
+definitions:
+  UserUpdate:
+    type: 'object'
+    properties:
+      name:
+        type: 'string'
+      email:
+        type: 'string'
+      password_hash:
+        type: 'string'

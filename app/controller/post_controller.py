@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from flasgger import Swagger, swag_from
+import os
+
 # from model import Post
 # from service import PostService
 # from utils import AuthorizationError,UserNotFoundError,PostNotFoundError, MissingData
-
-
 from  model.post import Post
 from  service.post_service import PostService; from service.user_service import UserService
 from  utils.exceptions import AuthorizationError,UserNotFoundError,PostNotFoundError, MissingData
@@ -13,9 +14,14 @@ from  create_db import db
 
 post_bp = Blueprint('posts',__name__,url_prefix='/posts')
 
+base_dir = os.path.dirname(__file__)
+swagger_dir = os.path.join(base_dir, '../docs/')
+swagger_dir = os.path.normpath(swagger_dir)
+
 #seria possivel criar uma rota de perfil, que mostra informacoes de um usuario e seus posts.
 
 @post_bp.route('/',methods=['GET'])
+@swag_from(os.path.join(swagger_dir,'posts/get_all_posts.yml'))
 def get_all_posts():
     """Get list of every single post"""
     try:
@@ -26,6 +32,7 @@ def get_all_posts():
 
 @post_bp.route('/create',methods=['POST'])
 @jwt_required()
+@swag_from(os.path.join(swagger_dir,'posts/create_posts.yml'))
 def create_post():
     """Create a post. It requires author_id, title and post content."""
     data = request.get_json()
@@ -51,6 +58,7 @@ def create_post():
     
 
 @post_bp.route('/user/<int:user_id>',methods=['GET'])
+@swag_from(os.path.join(swagger_dir,'posts/get_user_posts.yml'))
 def get_user_posts(user_id):
     """Get list of posts by an specific user."""
     #seria possivel tambem utilizar userservice para checar se o usuario existe, retornando erro caso nao
@@ -61,6 +69,7 @@ def get_user_posts(user_id):
         return jsonify({'error': e}), 500
 
 @post_bp.route('/<int:post_id>',methods=['GET'])
+@swag_from(os.path.join(swagger_dir,'posts/get_post.yml'))
 def get_post(post_id):
     """Get a post by id."""
     #seria possivel tambem utilizar userservice para checar se o usuario existe, retornando erro caso nao
@@ -82,6 +91,7 @@ def get_post(post_id):
 
 @post_bp.route('/<int:post_id>', methods=['PUT'])
 @jwt_required()
+@swag_from(os.path.join(swagger_dir,'posts/update_post.yml'))
 def update_post(post_id):
     """Update a post by its data. It requires the new data. Only the author himself or an admin user can perform this."""
     try:
@@ -100,6 +110,7 @@ def update_post(post_id):
 
 @post_bp.route('/<int:post_id>', methods=['DELETE'])
 @jwt_required()
+@swag_from(os.path.join(swagger_dir,'posts/delete_post.yml'))
 def delete_post(post_id):
     """To delete a post. Only the author himself or an admin user can perform this."""
     try: 

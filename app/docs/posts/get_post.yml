@@ -1,0 +1,33 @@
+summary: 'Get a post by ID'
+description: 'Retrieve a post by its unique ID.'
+tags:
+  - Post
+parameters:
+  - in: 'path'
+    name: 'post_id'
+    type: 'integer'
+    required: true
+    description: 'The ID of the post to retrieve'
+responses:
+  200:
+    description: 'Post found and returned'
+    schema:
+      $ref: '#/definitions/PostDetail'
+  404:
+    description: 'Post not found'
+  500:
+    description: 'Internal server error'
+definitions:
+  PostDetail:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      author_id:
+        type: 'integer'
+      author_name:
+        type: 'string'
+      title:
+        type: 'string'
+      content:
+        type: 'string'

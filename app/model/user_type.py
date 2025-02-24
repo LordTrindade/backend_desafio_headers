@@ -8,3 +8,5 @@ class UserType(db.Model):
 #tipos criados:
 #ADMIN
 #DEFAULT
+
+#seria possivel tambem criar uma tabela a mais que relaciona o usuario ao tipo. estaria em uma forma mais normalizada.

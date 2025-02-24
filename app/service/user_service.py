@@ -1,7 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 # from model import User, UserType
 # from utils import AuthorizationError,UserNotFoundError, UsedEmailError, InvalidUserType, MissingData
-
 from  model.user import User; from  model.user_type import UserType
 from  utils.exceptions import AuthorizationError,UserNotFoundError, UsedEmailError, InvalidUserType, MissingData
 

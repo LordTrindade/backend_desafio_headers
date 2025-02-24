@@ -1,0 +1,28 @@
+summary: 'Get all posts'
+description: 'Retrieve a list of all posts in the system.'
+tags:
+  - Post
+responses:
+  200:
+    description: 'Successful retrieval of all posts'
+    schema:
+      type: 'object'
+      properties:
+        data:
+          type: 'array'
+          items:
+            $ref: '#/definitions/Post'
+  500:
+    description: 'Internal server error'
+definitions:
+  Post:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      title:
+        type: 'string'
+      content:
+        type: 'string'
+      author_id:
+        type: 'integer'

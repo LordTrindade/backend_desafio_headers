@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+from flasgger import Swagger
 
 #from service import UserService, PostService
 from service.user_service import UserService; from service.post_service import PostService
@@ -30,6 +31,7 @@ def create_app():
     def home():
         return 'Hello from Flask!'
 
+    swagger = Swagger(app)
     return app
 
 def ensure_admin_exists():

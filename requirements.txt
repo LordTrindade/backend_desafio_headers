@@ -8,3 +8,4 @@ SQLAlchemy==2.0.38
 Werkzeug==2.2.2
 psycopg2-binary
 psycopg2
+flasgger

@@ -1,0 +1,28 @@
+summary: 'Create a post'
+description: 'Create a new post with the given author ID, title, and content. Requires JWT authentication.'
+tags:
+  - Post
+parameters:
+  - in: 'body'
+    name: 'post'
+    description: 'Post data to create a new post'
+    required: true
+    schema:
+      type: 'object'
+      properties:
+        author_id:
+          type: 'integer'
+          description: 'ID of the author creating the post'
+        title:
+          type: 'string'
+          description: 'Title of the post'
+        content:
+          type: 'string'
+          description: 'Content of the post'
+responses:
+  201:
+    description: 'Post created successfully'
+  400:
+    description: 'Missing data or could not create post'
+  500:
+    description: 'Internal server error'

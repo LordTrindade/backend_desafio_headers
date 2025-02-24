@@ -1,0 +1,22 @@
+summary: 'Get posts by user'
+description: 'Retrieve a list of posts by a specific user ID.'
+tags:
+  - Post
+parameters:
+  - in: 'path'
+    name: 'user_id'
+    type: 'integer'
+    required: true
+    description: 'User ID to retrieve posts'
+responses:
+  200:
+    description: 'Successful retrieval of posts'
+    schema:
+      type: 'object'
+      properties:
+        data:
+          type: 'array'
+          items:
+            $ref: '#/definitions/Post'
+  500:
+    description: 'Internal server error'

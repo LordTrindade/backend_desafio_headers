@@ -1,0 +1,40 @@
+summary: 'User login'
+description: 'Authenticate a user by email and password to receive an access token.'
+tags:
+  - Authentication
+parameters:
+  - in: 'body'
+    name: 'credentials'
+    description: 'User login credentials'
+    required: true
+    schema:
+      type: 'object'
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: 'string'
+          format: 'email'
+          description: 'User email address'
+        password:
+          type: 'string'
+          format: 'password'
+          description: 'User password'
+responses:
+  200:
+    description: 'Login successful, access token provided'
+    schema:
+      type: 'object'
+      properties:
+        access_token:
+          type: 'string'
+          description: 'JWT access token'
+  401:
+    description: 'Unauthorized, incorrect email or password'
+    schema:
+      type: 'object'
+      properties:
+        msg:
+          type: 'string'
+          example: "'Email not registered'. or 'Bad password.'"

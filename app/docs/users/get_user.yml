@@ -1,0 +1,19 @@
+summary: 'Get a single user'
+description: 'Fetch a single user by user ID. Does not require JWT authentication.'
+parameters:
+  - in: 'path'
+    name: 'user_id'
+    required: true
+    type: 'integer'
+    description: 'The user ID'
+tags:
+  - User
+responses:
+  200:
+    description: 'User found'
+    schema:
+      $ref: '#/definitions/User'
+  404:
+    description: 'User not found'
+  500:
+    description: 'Internal server error'

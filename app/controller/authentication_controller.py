@@ -1,12 +1,20 @@
 
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import create_access_token,jwt_required, get_jwt_identity
+from flasgger import Swagger, swag_from
 from model.user import User;
 from service.user_service import UserService
 
 auth_bp = Blueprint('login',__name__,url_prefix='/authentication')
 
+
+import os
+base_dir = os.path.dirname(__file__)
+swagger_dir = os.path.join(base_dir, '../docs/')
+swagger_dir = os.path.normpath(swagger_dir)
+
 @auth_bp.route('/login', methods=['POST'])
+@swag_from(os.path.join(swagger_dir,'authentication/login.yml'))
 def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
@@ -23,10 +31,10 @@ def login():
 @auth_bp.route('/refresh', methods=['POST'])
 @jwt_required()
 def refresh_token():
-    # Obter a identidade do token atual
     current_user = get_jwt_identity()
 
-    # Criar um novo token de acesso com uma nova data de validade
     new_token = create_access_token(identity=current_user)
 
     return jsonify(access_token=new_token), 200
+
+#nao cheguei a usar a funcao na pratica... mas teoricamente, aqui seria o refresh do token. poderia ser feito ao acessar certos endpoints.

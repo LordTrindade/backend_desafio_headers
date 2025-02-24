@@ -1,0 +1,19 @@
+summary: 'Delete a post'
+description: 'Delete a post by its ID. Requires JWT authentication and user/admin rights.'
+tags:
+  - Post
+parameters:
+  - in: 'path'
+    name: 'post_id'
+    type: 'integer'
+    required: true
+    description: 'ID of the post to delete'
+responses:
+  200:
+    description: 'Post deleted successfully'
+  403:
+    description: 'Unauthorized to delete the post'
+  404:
+    description: 'Post not found'
+  500:
+    description: 'Internal server error'
